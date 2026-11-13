@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Annum Forums</title>
+<style>
+.form-card {
+  background: var(--panel);
+  border: 1px solid #49335e;
+  border-radius: 15px;
+  padding: 20px;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+.special-text {
+  color: #c39aff;
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.form-card label {
+  display: block;
+  margin: 15px 0 7px;
+  color: var(--light);
+}
+
+.form-card input {
+  width: 100%;
+  padding: 13px;
+  border-radius: 9px;
+  border: 1px solid #49335e;
+  background: #0c0912;
+  color: white;
+  outline: none;
+}
+
+.form-card button {
+  width: 100%;
+  margin-top: 20px;
+}
+
+#formMessage {
+  margin-top: 12px;
+  color: var(--light);
+}
+
+.player-phone {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.rules-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.rule-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 18px;
+  background: var(--panel);
+  border: 1px solid #342442;
+  border-radius: 13px;
+  transition: .2s ease;
+}
+
+.rule-item:hover {
+  border-color: var(--purple);
+  transform: translateY(-2px);
+}
+
+.rule-number {
+  color: var(--purple);
+  font-size: 17px;
+  font-weight: 800;
+  min-width: 28px;
+}
+
+.rule-item h3 {
+  color: var(--light);
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 7px;
+}
+
+.rule-item p {
+  color: #bdb1ca;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.rule-item code {
+  color: #d5b4ff;
+  background: #291b38;
+  padding: 3px 7px;
+  border-radius: 5px;
+  font-weight: 600;
+}
+
+.rules-footer {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #49335e;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #21142e, #120d19);
+}
+
+.rules-footer h3 {
+  color: var(--purple);
+  font-size: 16px;
+  font-weight: 800;
+  margin: 0 0 8px;
+}
+
+.rules-footer p {
+  color: #bdb1ca;
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 0;
+}
+:root{--bg:#0c0912;--panel:#191123;--purple:#9b5cff;--light:#c39aff;--text:#f7f1ff;--muted:#a99bb8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(ellipse at top,#382052,transparent 45%),var(--bg);color:var(--text);font-family:Arial,sans-serif;min-height:100vh}
+header{min-height:75px;padding:12px 7%;display:flex;justify-content:space-between;align-items:center;background:#0c0912dd;backdrop-filter:blur(15px);border-bottom:1px solid #ffffff15;position:sticky;top:0;z-index:10}
+.logo{font-weight:900;letter-spacing:3px;font-size:18px}.logo span{color:var(--light)}
+nav{display:flex;gap:20px}nav a{color:var(--muted);text-decoration:none;font-size:13px}nav a:hover{color:white}
+main{max-width:1150px;padding:0 25px;margin:auto}
+.page{display:none;animation:appear .4s ease}.page.active{display:block}
+@keyframes appear{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:translateX(0)}}
+.hero{padding:110px 0 85px}.eyebrow{color:var(--light);font-size:11px;font-weight:bold;letter-spacing:4px}
+.hero h1{font-size:clamp(45px,8vw,85px);line-height:1;margin:20px 0}.hero h1 span{color:var(--light)}
+.hero p{color:var(--muted);line-height:1.8;max-width:550px}
+.primary{margin-top:25px;background:linear-gradient(135deg,#a568ff,#7138b5);border:0;padding:14px 22px;border-radius:10px;color:white;font-weight:bold;cursor:pointer;transition:.3s}
+.primary:hover{transform:translateY(-4px);box-shadow:0 10px 30px #9b5cff55}
+.section-title{margin:20px 0}.section-title h2{margin-top:10px;font-size:28px}
+.horizontal{display:flex;gap:18px;overflow-x:auto;padding:5px 2px 25px}
+.series-card{flex:0 0 320px;min-height:220px;padding:25px;text-align:left;color:white;border:1px solid #49335e;border-radius:18px;background:linear-gradient(145deg,#291a3b,#15101e);cursor:pointer;transition:.3s}
+.series-card:hover{transform:translateY(-7px);border-color:var(--purple)}
+.series-card small{color:var(--light);letter-spacing:2px}.series-card h3{margin:30px 0 10px;font-size:27px}
+.series-card p{color:var(--muted);line-height:1.6;font-size:13px}
+.page-header{padding:55px 0 30px;display:flex;align-items:center;gap:17px}
+.page-header h2{font-size:35px;margin-top:5px}.page-header p{color:var(--muted);font-size:13px;margin-top:8px}
+.back{width:43px;height:43px;border-radius:10px;border:1px solid #49335e;background:var(--panel);color:white;cursor:pointer}
+.back:hover{background:#39234e}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;padding-bottom:65px}
+.module{background:linear-gradient(145deg,#21152f,#130e1b);border:1px solid #49335e;border-radius:16px;padding:23px;min-height:150px;color:white;text-align:left;cursor:pointer;transition:.3s}
+.module:hover{transform:translateY(-5px);border-color:var(--purple)}
+.module .symbol{font-size:24px;color:var(--light)}.module h3{margin:16px 0 8px}
+.module p{color:var(--muted);font-size:12px;line-height:1.6}
+.items-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:17px;padding-bottom:65px}
+.item-card{background:linear-gradient(145deg,#21152f,#130e1b);border:1px solid #49335e;border-radius:16px;overflow:hidden}
+.item-image{height:165px;background:radial-gradient(circle,#543477,#21152f 75%);display:flex;justify-content:center;align-items:center}
+.item-image img{width:100%;height:100%;object-fit:contain;padding:15px}
+.item-info{padding:17px}.item-info h3{font-size:17px;margin-bottom:10px}
+.category{background:#9b5cff25;color:var(--light);display:inline-block;padding:6px 10px;border-radius:7px;font-size:10px;font-weight:bold}
+.whitelist-panel{background:linear-gradient(145deg,#21152f,#130e1b);border:1px solid #49335e;border-radius:16px;padding:23px;margin-bottom:25px}
+.whitelist-panel h3{margin-bottom:10px}.whitelist-panel p{color:var(--muted);font-size:13px;line-height:1.7}
+.whitelist-input{width:100%;margin-top:18px;padding:15px;border:1px solid #49335e;border-radius:9px;background:#0c0912;color:white;outline:none;font-size:15px}
+.whitelist-input:focus{border-color:var(--purple)}
+.whitelist-button{margin-top:12px;padding:13px 20px;width:100%;border:0;border-radius:9px;background:linear-gradient(135deg,#a568ff,#7138b5);color:white;font-weight:bold;cursor:pointer}
+.whitelist-button:disabled{opacity:.5;cursor:not-allowed}
+.status{margin-top:13px;font-size:13px;line-height:1.6;color:var(--light)}
+.list-header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:25px 0 15px}
+.list-header h3{font-size:20px}.count{color:var(--light);font-size:12px}
+.player-list{display:grid;gap:10px;padding-bottom:30px}
+.player-row{display:flex;align-items:center;gap:13px;padding:16px;border:1px solid #49335e;border-radius:12px;background:#191123}
+.player-number{width:35px;height:35px;display:grid;place-items:center;border-radius:9px;background:#9b5cff25;color:var(--light);font-weight:bold;font-size:13px}
+.player-name{font-weight:bold;overflow-wrap:anywhere}
+.empty{color:var(--muted);padding:25px;text-align:center;border:1px dashed #49335e;border-radius:12px}
+.setup-panel{background:linear-gradient(145deg,#21152f,#130e1b);border:1px solid #49335e;border-radius:16px;padding:20px;margin:0 0 25px}
+.setup-panel h3{margin-bottom:9px;color:var(--light)}
+.setup-panel p,.setup-panel li{color:var(--muted);font-size:13px;line-height:1.7}
+.setup-panel ol{padding-left:20px;margin:10px 0 15px}
+.setup-links{display:flex;flex-wrap:wrap;gap:10px}
+.setup-link{display:inline-block;padding:11px 15px;border-radius:9px;border:1px solid var(--purple);color:white;background:#9b5cff25;text-decoration:none;font-size:12px;font-weight:bold}
+.setup-pending{padding:11px 15px;border:1px dashed #665078;border-radius:9px;color:var(--muted);font-size:12px}
+footer{border-top:1px solid #ffffff15;padding:30px;text-align:center;color:#82748f;font-size:11px;letter-spacing:2px}
+@media(max-width:600px){header{padding:15px 18px;flex-wrap:wrap;gap:12px}nav{gap:12px}.hero{padding:80px 0}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">ANNUM <span>FORUMS</span></div>
+  <nav>
+    <a href="#" onclick="showPage('home');return false">Home</a>
+    <a href="#" onclick="showPage('home');setTimeout(()=>document.getElementById('series-heading').scrollIntoView({behavior:'smooth'}),100);return false">Series</a>
+  </nav>
+</header>
+<main>
+<section id="home" class="page active">
+  <div class="hero">
+    <div class="eyebrow">A WORLD BEYOND THE ORDINARY</div>
+    <h1>Explore the<br><span>Annum Universe.</span></h1>
+    <p>Temukan berbagai resource, item, dan informasi dari dunia roleplay Annum.</p>
+    <button class="primary" onclick="document.getElementById('series-heading').scrollIntoView({behavior:'smooth'})">Explore Series ↗</button>
+  </div>
+  <div id="series-heading" class="section-title"><div class="eyebrow">CHOOSE YOUR WORLD</div><h2>Featured Series</h2></div>
+  <div class="horizontal">
+    <button class="series-card" onclick="showPage('series')"><small>01 / ROLEPLAY SERIES</small><h3>Annum HardCore</h3><p>Semua kebutuhan dan resource untuk perjalanan Annum HardCore.</p></button>
+    <button class="series-card" onclick="alert('Coming Soon!')"><small>02 / COMING SOON</small><h3>More Universes</h3><p>Series Annum lainnya segera hadir.</p></button>
+  </div>
+</section>
+
+<section id="series" class="page">
+  <div class="page-header"><button class="back" onclick="showPage('home')">←</button><div><div class="eyebrow">ANNUM SERIES / 01</div><h2>Annum HardCore</h2><p>Pilih fitur yang ingin dibuka.</p></div></div>
+  <div class="grid">
+    <button class="module" onclick="showPage('items')"><div class="symbol">⚔</div><h3>Items Rename</h3><p>Daftar item custom Annum.</p></button>
+    <button class="module" onclick="showPage('whitelist')"><div class="symbol">✎</div><h3>Daftar</h3><p>Daftarkan username Minecraft kamu.</p></button>
+    <button class="module" onclick="showPage('players')"><div class="symbol">☷</div><h3>List Daftar</h3><p>Lihat semua username yang sudah terdaftar.</p></button>
+    <button class="module" onclick="showPage('rules')"><div class="symbol">⌘</div><h3>Rules</h3><p>Peraturan Annum HardCore.</p></button>
+  </div>
+</section>
+
+<section id="items" class="page">
+  <div class="page-header"><button class="back" onclick="showPage('series')">←</button><div><div class="eyebrow">ANNUM HARDCORE / ITEMS</div><h2>Items Rename</h2><p>Pilih kategori item.</p></div></div>
+  <div class="setup-panel">
+    <h3>⚙ Persiapan Items Rename</h3>
+    <p>Agar tampilan item rename Annum muncul dengan benar, pasang mod <b>CIT Resewn</b> dan gunakan texture pack Annum.</p>
+    <ol>
+      <li>Pastikan Minecraft Java kamu menggunakan Fabric.</li>
+      <li>Unduh CIT Resewn yang sesuai dengan versi Minecraft kamu, lalu pasang file mod-nya ke folder <b>mods</b>.</li>
+      <li>Unduh texture pack Annum dan aktifkan melalui menu Resource Packs di Minecraft.</li>
+      <li> mod wajib ini khusus untuk versi 1.21.4 kebawah, jika versi Minecraft mu 1.21.4 keatas maka kamu
+      tidak perlu menggunakan mod ini
+    </ol>
+    <div class="setup-links">
+      <a class="setup-link" href="https://modrinth.com/mod/cit-resewn" target="_blank" rel="noopener noreferrer">Download CIT Resewn ↗</a>
+      <a class="setup-link" href="https://modrinth.com/resourcepack/vanilla-named-variants?loader=minecraft&version=1.21.11" target="_blank" rel="noopener noreferrer">Download Texture Annum ↗</a>
+    </div>
+  </div>
+  <div id="categories" class="grid"></div>
+  <div id="categoryContent" style="display:none">
+    <div class="page-header" style="padding-top:10px"><button class="back" onclick="backCategories()">←</button><div><div class="eyebrow">ITEM CATEGORY</div><h2 id="categoryTitle">Armor</h2><p>Daftar item dalam kategori ini.</p></div></div>
+    <div id="itemList" class="items-grid"></div>
+  </div>
+</section>
+
+<<section id="whitelist" class="page">
+  <div class="page-header">
+    <button class="back" onclick="showPage('series')">←</button>
+    <div>
+      <div class="eyebrow">ANNUM HARDCORE</div>
+      <h2>Daftar Whitelist</h2>
+      <p>Daftarkan akun Minecraft kamu.</p>
+    </div>
+  </div>  
+  <div class="form-card">
+    <form id="whitelistForm">
+      <label for="mcUsername">Nama Minecraft</label>
+      <input
+        type="text"
+        id="mcUsername"
+        placeholder="Masukkan username Minecraft"
+        minlength="3"
+        maxlength="16"
+        pattern="[A-Za-z0-9_]+"
+        required
+      >
+      <label for="waNumber">Nomor WhatsApp</label>
+      <input
+        type="tel"
+        id="waNumber"
+        placeholder="+628xxxxxxxxxx"
+        required
+      >
+      <button type="submit" class="primary" id="registerBtn">
+        Daftar
+      </button>
+    </form>
+    <p id="formMessage"></p>
+  </div>
+</section>
+
+<section id="players" class="page">
+  <div class="page-header">
+    <button class="back" onclick="showPage('series')">←</button>
+    <div>
+      <div class="eyebrow">ANNUM HARDCORE</div>
+      <h2>List terdaftar</h2>
+      <p>Daftar pemain yang sudah mendaftar.</p>
+    </div>
+  </div>
+  <div id="playerList" class="player-list">
+    <p class="empty">Memuat daftar...</p>
+  </div>
+</section>
+
+<section id="rules" class="page">
+  <div class="page-header">
+    <button class="back" onclick="showPage('series')">←</button>
+    <div>
+      <div class="eyebrow">ANNUM HARDCORE</div>
+      <h2>Peraturan & Informasi</h2>
+      <p>Ketentuan selama bermain di Annum Hardcore.</p>
+    </div>
+  </div>
+  <div class="rules-container">
+    <div class="rule-item">
+      <span class="rule-number">01</span>
+      <div>
+        <h3>Random Spawn</h3>
+        <p>Saat pertama kali memasuki server, lokasi spawn kamu akan ditentukan secara acak.</p>
+      </div>
+    </div>
+    <div class="rule-item">
+      <span class="rule-number">02</span>
+      <div>
+        <h3>Starter Kit</h3>
+        <p>Setiap pemain dapat mengklaim kit awal menggunakan perintah <code>/kit</code> melalui chat.</p>
+      </div>
+    </div>
+    <div class="rule-item">
+      <span class="rule-number">03</span>
+      <div>
+        <h3>Sistem Limbo</h3>
+        <p>Jangan sampai mati! Setiap pemain yang mati akan dipindahkan ke dunia <b>Limbo</b>.</p>
+      </div>
+    </div>
+    <div class="rule-item">
+      <span class="rule-number">04</span>
+      <div>
+        <h3>Death Penalty</h3>
+        <p>Setiap kematian akan menggandakan waktu hukuman (x2), sesuai jumlah kematian yang dialami.</p>
+      </div>
+    </div>
+    <div class="rule-item">
+      <span class="rule-number">05</span>
+      <div>
+        <h3>Netherite Disabled</h3>
+        <p>Ancient Debris dan Netherite dinonaktifkan selama <b>5 hari</b>, terhitung sejak server resmi dibuka.</p>
+      </div>
+    </div>
+    <div class="rule-item">
+      <span class="rule-number">06</span>
+      <div>
+        <h3>World Border</h3>
+        <p>Overworld: <b>7000 × 7000</b> blok</p>
+        <p>Nether: <b>3500 × 3500</b> blok</p>
+      </div>
+    </div>
+    <div class="rule-item">
+      <span class="rule-number">07</span>
+      <div>
+        <h3>Mace Event</h3>
+        <p>Hanya terdapat <b>1 Mace</b> di seluruh server. Mace tersebut akan menjadi hadiah dalam event khusus.</p>
+      </div>
+    </div>
+    <div class="rule-item">
+      <span class="rule-number">08</span>
+      <div>
+        <h3>Nether Lock</h3>
+        <p>Dimensi Nether akan ditutup selama <b>3 hari</b> sejak server dibuka.</p>
+      </div>
+    </div>
+    <div class="rule-item">
+      <span class="rule-number">09</span>
+      <div>
+        <h3>The End Disabled</h3>
+        <p>Dimensi The End tidak akan dibuka selama server berlangsung.</p>
+      </div>
+    </div>
+    <div class="rule-item">
+      <span class="rule-number">10</span>
+      <div>
+        <h3>Roleplay System</h3>
+        <p>Sistem Roleplay akan tetap berjalan selama terdapat pemain yang online, kecuali ketika pemain sedang AFK.</p>
+      </div>
+    </div>
+    <div class="rule-item">
+      <span class="rule-number">11</span>
+      <div>
+        <h3>Mending Event</h3>
+        <p>Mending tidak dapat diperoleh melalui cara biasa. Event Mending akan diadakan <b>1 kali setiap minggu</b> dengan durasi <b>1 jam</b>.</p>
+      </div>
+    </div>
+    <div class="rule-item">
+      <span class="rule-number">12</span>
+      <div>
+        <h3>Mending melalui Saweria</h3>
+        <p>Pemain juga dapat memperoleh Mending melalui Saweria Admin dengan harga <b>Rp10.000 untuk 1 Mending</b>.</p>
+      </div>
+    </div>
+  </div>
+  <div class="rules-footer">
+    <h3>ANNUM HARDCORE</h3>
+    <p>Harap pahami seluruh aturan sebelum bermain. Setiap pemain wajib mengikuti ketentuan yang telah ditetapkan.</p>
+  </div>
+</section>
+
+</main>
+<footer>© 2026 ANNUM FORUMS</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://wkiuolwkffurwvbebztx.supabase.co";
+const SUPABASE_KEY = "sb_publishable_2mLKkOVUg01VwFMl7vuUoQ_wtcI2_DD";
+
+const db = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+// PENDAFTARAN
+document.getElementById("whitelistForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const username = document.getElementById("mcUsername").value.trim();
+  const whatsapp = document.getElementById("waNumber").value.trim();
+  const message = document.getElementById("formMessage");
+  const button = document.getElementById("registerBtn");
+
+  if (!username || !whatsapp) {
+    message.textContent = "Semua kolom wajib diisi!";
+    return;
+  }
+
+  if (!/^[A-Za-z0-9_]{3,16}$/.test(username)) {
+    message.textContent = "Username Minecraft tidak valid!";
+    return;
+  }
+
+  if (!/^\+[1-9]\d{7,14}$/.test(whatsapp)) {
+    message.textContent = "Nomor WhatsApp harus menggunakan kode negara, contoh +6281234567890.";
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "Mendaftarkan...";
+
+  const { error } = await db
+    .from("whitelist")
+    .insert([{
+      username: username,
+      whatsapp: whatsapp
+    }]);
+
+  button.disabled = false;
+  button.textContent = "Daftar";
+
+  if (error) {
+    if (error.code === "23505") {
+      message.textContent = "Username Minecraft sudah terdaftar!";
+    } else {
+      message.textContent = "Pendaftaran gagal: " + error.message;
+    }
+    return;
+  }
+
+  message.textContent = "Pendaftaran berhasil!";
+  this.reset();
+});
+
+
+// MEMUAT DAFTAR WHITELIST
+async function loadPlayers() {
+  const container = document.getElementById("playerList");
+
+  container.innerHTML = '<p class="empty">Memuat daftar...</p>';
+
+  const { data, error } = await db
+    .from("whitelist")
+    .select("username, whatsapp")
+    .order("username", { ascending: true });
+
+  if (error) {
+    container.innerHTML = '<p class="empty">Gagal memuat daftar.</p>';
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    container.innerHTML = '<p class="empty">Belum ada pendaftar.</p>';
+    return;
+  }
+
+  container.innerHTML = "";
+
+  data.forEach((player, index) => {
+    const item = document.createElement("div");
+    item.className = "player-row";
+
+    const number = document.createElement("div");
+    number.className = "player-number";
+    number.textContent = index + 1;
+
+    const info = document.createElement("div");
+
+    const name = document.createElement("div");
+    name.className = "player-name";
+    name.textContent = player.username;
+
+    const phone = document.createElement("div");
+    phone.className = "player-phone";
+    phone.textContent = player.whatsapp;
+
+    info.appendChild(name);
+    info.appendChild(phone);
+
+    item.appendChild(number);
+    item.appendChild(info);
+
+    container.appendChild(item);
+  });
+}
+
+function showPage(id){
+  const target=document.getElementById(id);
+  if(!target){alert("Halaman tidak ditemukan: "+id);return;}
+  document.querySelectorAll('.page').forEach(page=>page.classList.remove('active'));
+  target.classList.add('active');
+  if(id==='items')backCategories();
+  if(id==='players')loadPlayers();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+const categories=["Armor","Shield","Sword","Axe","Totem","Spear","Mace","Bow","Crossbow","Pickaxe"];
+const icons={Armor:"♜",Shield:"⬡",Sword:"⚔",Axe:"⚒",Totem:"✧",Spear:"➶",Mace:"✥",Bow:"⌁",Crossbow:"⊹",Pickaxe:"⛏"};
+const categoryContainer=document.getElementById('categories');
+categories.forEach(category=>{
+  const button=document.createElement('button');
+  button.className='module';
+  button.innerHTML=`<div class="symbol">${icons[category]}</div><h3>${category}</h3><p>View ${category} items.</p>`;
+  button.onclick=()=>showCategory(category);
+  categoryContainer.appendChild(button);
+});
+
+const itemData={
+  Armor:[{name:"Example Armor",image:"images/armor.png"}],
+  Shield:[{name:"Example Shield",image:"images/shield.png"}],
+  Sword:[{name:"Example Sword",image:"images/sword.png"}],
+  Axe:[{name:"Example Axe",image:"images/axe.png"}],
+  Totem:[{name:"Example Totem",image:"images/totem.png"}],
+  Spear:[{name:"Example Spear",image:"images/spear.png"}],
+  Mace:[{name:"Example Mace",image:"images/mace.png"}],
+  Bow:[{name:"Example Bow",image:"images/bow.png"}],
+  Crossbow:[{name:"Example Crossbow",image:"images/crossbow.png"}],
+  Pickaxe:[{name:"Example Pickaxe",image:"images/pickaxe.png"}]
+};
+
+function showCategory(category){
+  document.getElementById('categories').style.display='none';
+  document.getElementById('categoryContent').style.display='block';
+  document.getElementById('categoryTitle').textContent=category;
+  const list=document.getElementById('itemList');
+  list.innerHTML='';
+  const items=itemData[category]||[];
+  if(!items.length){list.innerHTML='<p class="empty">Belum ada item dalam kategori ini.</p>';return;}
+  items.forEach(item=>{
+    const card=document.createElement('article');card.className='item-card';
+    const imageBox=document.createElement('div');imageBox.className='item-image';
+    const img=document.createElement('img');img.src=item.image;img.alt=item.name;
+    img.onerror=()=>{imageBox.textContent='Image not found';};
+    imageBox.appendChild(img);
+    const info=document.createElement('div');info.className='item-info';
+    const title=document.createElement('h3');title.textContent=item.name;
+    const tag=document.createElement('span');tag.className='category';tag.textContent=category;
+    info.append(title,tag);card.append(imageBox,info);list.appendChild(card);
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function backCategories(){
+  document.getElementById('categories').style.display='grid';
+  document.getElementById('categoryContent').style.display='none';
+}
+
+const form=document.getElementById('whitelistForm');
+const usernameInput=document.getElementById('usernameInput');
+const registerButton=document.getElementById('registerButton');
+const registerStatus=document.getElementById('registerStatus');
+
+form.addEventListener('submit',async event=>{
+  event.preventDefault();
+  const username=usernameInput.value.trim();
+  if(!/^[A-Za-z0-9_]{3,16}$/.test(username)){
+    registerStatus.textContent='Username harus 3-16 karakter dan hanya boleh berisi huruf, angka, atau underscore.';
+    return;
+  }
+  registerButton.disabled=true;
+  registerButton.textContent='Mendaftarkan...';
+  registerStatus.textContent='Sedang menyimpan pendaftaran...';
+  try{
+    const {data:existing,error:checkError}=await db.from('whitelist').select('username').ilike('username',username).limit(1);
+    if(checkError)throw checkError;
+    if(existing&&existing.length){
+      registerStatus.textContent='Username tersebut sudah terdaftar!';
+      return;
+    }
+    const {error:insertError}=await db.from('whitelist').insert([{username}]);
+    if(insertError){
+      if(insertError.code==='23505'){
+        registerStatus.textContent='Username tersebut sudah terdaftar!';
+        return;
+      }
+      throw insertError;
+    }
+    registerStatus.textContent='Berhasil! Username '+username+' sudah masuk daftar.';
+    usernameInput.value='';
+  }catch(error){
+    console.error('Whitelist error:',error);
+    registerStatus.textContent='Gagal mendaftar. Periksa koneksi atau pengaturan database.';
+  }finally{
+    registerButton.disabled=false;
+    registerButton.textContent='Daftar Sekarang';
+  }
+});
+
+async function loadPlayers() {
+  const container = document.getElementById("playerList");
+
+  if (!container) {
+    console.error("Elemen playerList tidak ditemukan!");
+    return;
+  }
+
+  container.innerHTML = "<p>Memuat daftar...</p>";
+
+  const { data, error } = await db
+    .from("whitelist")
+    .select("username, whatsapp")
+    .not("whatsapp", "is", null)
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("WHITELIST ERROR:", error);
+    container.textContent = "Gagal memuat: " + error.message;
+    return;
+  }
+
+  console.log("DATA WHITELIST:", data);
+
+  if (!data || data.length === 0) {
+    container.textContent = "Belum ada pendaftar.";
+    return;
+  }
+
+  container.innerHTML = "";
+
+  data.forEach((player, index) => {
+    const item = document.createElement("div");
+    item.className = "player-row";
+
+    const number = document.createElement("div");
+    number.className = "player-number";
+    number.textContent = index + 1;
+
+    const info = document.createElement("div");
+
+    const name = document.createElement("div");
+    name.className = "player-name";
+    name.textContent = player.username;
+
+    const phone = document.createElement("div");
+    phone.className = "player-phone";
+    phone.textContent = player.whatsapp;
+
+    info.append(number, name, phone);
+    item.append(number, info);
+
+    container.appendChild(item);
+  });
+}
+</script>
+</body>
+</html>
